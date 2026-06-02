@@ -4,7 +4,7 @@ import Sidebar from '../sidebar/Sidebar';
 import Topbar from '../topbar/Topbar';
 import { useMode } from '../../context/ModeContext';
 
-const FULL_WIDTH_ROUTES = ['/messenger', '/calendar'];
+const FULL_WIDTH_ROUTES = ['/messenger', '/calendar', '/ai-assistant'];
 
 export default function AppShell() {
   const { mode }     = useMode();
