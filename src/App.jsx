@@ -5,16 +5,17 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 
 // Employee mode
-import AppShell     from '../components/common/AppShell';
-import Dashboard    from '../pages/Dashboard';
-import Profile      from '../pages/Profile';
-import Career       from '../pages/Career';
-import Learning     from '../pages/Learning';
+import AppShell      from '../components/common/AppShell';
+import Dashboard     from '../pages/Dashboard';
+import Profile       from '../pages/Profile';
+import Career        from '../pages/Career';
+import Learning      from '../pages/Learning';
 import Opportunities from '../pages/Opportunities';
-import Messenger    from '../pages/Messenger';
-import Calendar     from '../pages/Calendar';
-import Analytics    from '../pages/Analytics';
-import Settings     from '../pages/Settings';
+import MessengerPage from '../pages/MessengerPage';
+import AIAssistant   from '../pages/Messenger';
+import Calendar      from '../pages/Calendar';
+import Analytics     from '../pages/Analytics';
+import Settings      from '../pages/Settings';
 
 // Manager mode
 import ManagerShell      from '../pages/manager/ManagerShell';
@@ -37,7 +38,8 @@ export default function App() {
         <Route path="career"       element={<Career />} />
         <Route path="learning"     element={<Learning />} />
         <Route path="opportunities" element={<Opportunities />} />
-        <Route path="messenger"    element={<Messenger />} />
+        <Route path="messenger"      element={<MessengerPage />} />
+        <Route path="ai-assistant"   element={<AIAssistant />} />
         <Route path="calendar"     element={<Calendar />} />
         <Route path="analytics"    element={<Analytics />} />
         <Route path="settings"     element={<Settings />} />

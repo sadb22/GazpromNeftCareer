@@ -8,11 +8,11 @@ import { useMode } from '../../context/ModeContext';
 import { managerUser } from '../../data/managerData';
 
 const NAV = [
-  { to: '/manager/team',      icon: <Users size={18} />,        label: 'Команда' },
+  { to: '/manager/team',      icon: <Users size={18} />,         label: 'Команда' },
+  { to: '/manager/messages',  icon: <Mail size={18} />,          label: 'Сообщения' },
+  { to: '/manager/calendar',  icon: <Calendar size={18} />,      label: 'Календарь' },
+  { to: '/manager/analytics', icon: <BarChart2 size={18} />,     label: 'Аналитика' },
   { to: '/manager/chat',      icon: <MessageSquare size={18} />, label: 'AI-чат' },
-  { to: '/manager/calendar',  icon: <Calendar size={18} />,     label: 'Календарь' },
-  { to: '/manager/analytics', icon: <BarChart2 size={18} />,    label: 'Аналитика' },
-  { to: '/manager/messages',  icon: <Mail size={18} />,         label: 'Сообщения' },
 ];
 
 const PRIMARY = '#003366';
