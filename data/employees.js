@@ -1,8 +1,8 @@
 export const employees = [
   {
     id: 1,
-    name: 'Иван Петров',
-    initials: 'ИП',
+    name: 'Юрий Тумасов',
+    initials: 'ЮТ',
     role: 'Backend Developer',
     level: 'Middle',
     department: 'Цифровые технологии',
@@ -23,7 +23,7 @@ export const employees = [
     mobilitySignal: 'Готов к переходу',
     mobilitySignalColor: '#10B981',
     manager: 'Сергей Громов',
-    email: 'i.petrov@gazpromneft.ru',
+    email: 'yu.tumasov@gazpromneft.ru',
     phone: '+7 (495) 123-45-67',
     bio: 'Опытный backend-разработчик с фокусом на Python и высоконагруженных системах. Активно изучает AI/ML для перехода в направление AI Engineering.',
     achievements: ['Best Newcomer 2023', 'Python Excellence', 'Team Player Q2'],

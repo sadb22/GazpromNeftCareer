@@ -16,6 +16,7 @@ import AIAssistant   from '../pages/Messenger';
 import Calendar      from '../pages/Calendar';
 import Analytics     from '../pages/Analytics';
 import Settings      from '../pages/Settings';
+import AllCourses    from '../pages/AllCourses';
 
 // Manager mode
 import ManagerShell      from '../pages/manager/ManagerShell';
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="profile"      element={<Profile />} />
         <Route path="career"       element={<Career />} />
         <Route path="learning"     element={<Learning />} />
+        <Route path="learning/all" element={<AllCourses />} />
         <Route path="opportunities" element={<Opportunities />} />
         <Route path="messenger"      element={<MessengerPage />} />
         <Route path="ai-assistant"   element={<AIAssistant />} />

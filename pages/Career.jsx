@@ -145,7 +145,7 @@ export default function Career() {
   };
 
   return (
-    <div className="max-w-[820px] mx-auto space-y-5">
+    <div className="max-w-[1100px] mx-auto space-y-5">
 
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -190,150 +190,161 @@ export default function Career() {
 
       {aiGenerated && !aiLoading && (
         <>
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="bg-white rounded-2xl border border-border p-4 shadow-card text-center">
-              <p className="text-2xl font-bold text-dark">{user.careerProgress}%</p>
-              <p className="text-xs text-secondary mt-0.5">Прогресс</p>
-              <ProgressBar value={user.careerProgress} color="accent" height={4} className="mt-2" />
+          {/* Stats strip — full width */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white rounded-2xl border border-border p-5 shadow-card">
+              <p className="text-xs text-secondary mb-2">Прогресс</p>
+              <p className="text-3xl font-bold text-dark">{user.careerProgress}%</p>
+              <ProgressBar value={user.careerProgress} color="accent" height={5} className="mt-3" />
             </div>
-            <div className="bg-white rounded-2xl border border-border p-4 shadow-card text-center">
-              <p className="text-2xl font-bold text-accent">Q1 2027</p>
-              <p className="text-xs text-secondary mt-0.5">Прогноз</p>
+            <div className="bg-white rounded-2xl border border-border p-5 shadow-card">
+              <p className="text-xs text-secondary mb-2">Прогноз перехода</p>
+              <p className="text-3xl font-bold text-accent">Q1 2027</p>
+              <p className="text-xs text-secondary mt-2">При текущем темпе обучения</p>
             </div>
-            <div className="bg-white rounded-2xl border border-border p-4 shadow-card text-center">
-              <p className="text-2xl font-bold text-warning">{user.skillGaps.length}</p>
-              <p className="text-xs text-secondary mt-0.5">Пробелов</p>
+            <div className="bg-white rounded-2xl border border-border p-5 shadow-card">
+              <p className="text-xs text-secondary mb-2">Пробелов в навыках</p>
+              <p className="text-3xl font-bold text-warning">{user.skillGaps.length}</p>
+              <p className="text-xs text-secondary mt-2">{mustHave.length} обязательных</p>
             </div>
           </div>
 
-          {/* ── ROADMAP — primary block ─────────────────── */}
-          <Card>
-            <CardHeader title="Дорожная карта" subtitle="Персонализирован AI · Обновлено сегодня"
-              icon={<Target size={18} />} iconBg="#E8F0FA" iconColor="#005DB9" />
-            <div className="space-y-6">
-              {roadmap.map((phase, pi) => (
-                <div key={pi}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5
-                      ${phase.status === 'current' ? 'bg-accent text-white' : 'bg-background border border-border text-secondary'}`}>
-                      <Clock size={11} /> {phase.quarter}
-                      {phase.status === 'current' && <span className="opacity-80 text-[10px]">· {phase.label}</span>}
-                    </span>
-                    {phase.status !== 'current' && <span className="text-xs text-muted">~{phase.label}</span>}
-                  </div>
-                  <div className="ml-4 pl-4 border-l-2 border-border space-y-2">
-                    {phase.steps.map((step, si) => {
-                      const badge = typeColors[step.type];
-                      return (
-                        <div key={si} className="relative bg-background rounded-xl border border-border p-4 hover:border-accent/30 hover:bg-white transition-all">
-                          <div className="absolute -left-[21px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
-                            style={{ backgroundColor: step.status === 'in_progress' ? '#005DB9' : step.status === 'completed' ? '#1A7A4A' : '#DDE1E9' }} />
-                          <div className="flex items-start gap-3">
-                            <span className="text-lg flex-shrink-0">{step.icon}</span>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap mb-1">
-                                <h4 className="text-sm font-semibold text-dark">{step.title}</h4>
-                                <Badge variant={badge.variant} className="text-[10px]">{badge.label}</Badge>
-                                {step.skillGap && <Badge variant="warning" className="text-[10px]">{step.skillGap}</Badge>}
+          {/* ── TWO-COLUMN LAYOUT ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 items-start">
+
+            {/* ── LEFT: Roadmap (primary) ── */}
+            <Card>
+              <CardHeader title="Дорожная карта" subtitle="Персонализирован AI · Обновлено сегодня"
+                icon={<Target size={18} />} iconBg="#E8F0FA" iconColor="#005DB9" />
+              <div className="space-y-6">
+                {roadmap.map((phase, pi) => (
+                  <div key={pi}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5
+                        ${phase.status === 'current' ? 'bg-accent text-white' : 'bg-background border border-border text-secondary'}`}>
+                        <Clock size={11} /> {phase.quarter}
+                        {phase.status === 'current' && <span className="opacity-80 text-[10px]">· {phase.label}</span>}
+                      </span>
+                      {phase.status !== 'current' && <span className="text-xs text-muted">~{phase.label}</span>}
+                    </div>
+                    <div className="ml-4 pl-4 border-l-2 border-border space-y-2">
+                      {phase.steps.map((step, si) => {
+                        const badge = typeColors[step.type];
+                        return (
+                          <div key={si} className="relative bg-background rounded-xl border border-border p-4 hover:border-accent/30 hover:bg-white transition-all">
+                            <div className="absolute -left-[21px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
+                              style={{ backgroundColor: step.status === 'in_progress' ? '#005DB9' : step.status === 'completed' ? '#1A7A4A' : '#DDE1E9' }} />
+                            <div className="flex items-start gap-3">
+                              <span className="text-lg flex-shrink-0">{step.icon}</span>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap mb-1">
+                                  <h4 className="text-sm font-semibold text-dark">{step.title}</h4>
+                                  <Badge variant={badge.variant} className="text-[10px]">{badge.label}</Badge>
+                                  {step.skillGap && <Badge variant="warning" className="text-[10px]">{step.skillGap}</Badge>}
+                                </div>
+                                {step.status === 'in_progress' && (
+                                  <div className="mt-2">
+                                    <ProgressBar value={step.progress} color="accent" height={5} />
+                                    <p className="text-xs text-accent font-semibold mt-1">{step.progress}% выполнено</p>
+                                  </div>
+                                )}
+                                {step.status === 'not_started' && (
+                                  <p className="text-xs text-muted flex items-center gap-1 mt-1">
+                                    <Lock size={10} /> Ожидает предыдущих шагов
+                                  </p>
+                                )}
                               </div>
                               {step.status === 'in_progress' && (
-                                <div className="mt-2">
-                                  <ProgressBar value={step.progress} color="accent" height={5} />
-                                  <p className="text-xs text-accent font-semibold mt-1">{step.progress}% выполнено</p>
-                                </div>
-                              )}
-                              {step.status === 'not_started' && (
-                                <p className="text-xs text-muted flex items-center gap-1 mt-1">
-                                  <Lock size={10} /> Ожидает предыдущих шагов
-                                </p>
+                                <Button variant="secondary" size="sm" onClick={() => navigate('/learning')}>
+                                  Продолжить
+                                </Button>
                               )}
                             </div>
-                            {step.status === 'in_progress' && (
-                              <Button variant="secondary" size="sm" onClick={() => navigate('/learning')}>
-                                Продолжить
-                              </Button>
-                            )}
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* ── RIGHT: Radar + AI Insights + Gap Analysis ── */}
+            <div className="space-y-5">
+
+              {/* Competency Radar */}
+              <Card>
+                <CardHeader title="Компетенции" subtitle={`Текущие vs цель: ${user.targetRole}`}
+                  icon={<Award size={18} />} iconBg="#EDE9F6" iconColor="#6D4FA0" />
+                <ResponsiveContainer width="100%" height={200}>
+                  <RadarChart data={radarData} cx="50%" cy="50%" outerRadius={75}>
+                    <PolarGrid stroke="#DDE1E9" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: 9, fill: '#8A919E' }} />
+                    <Radar name="Текущий" dataKey="current" stroke="#005DB9" fill="#005DB9" fillOpacity={0.13} strokeWidth={2} />
+                    <Radar name="Цель"    dataKey="target"  stroke="#B8BDC5" fill="none" strokeWidth={1.5} strokeDasharray="4 2" />
+                    <Tooltip {...tooltip} />
+                  </RadarChart>
+                </ResponsiveContainer>
+                <div className="flex items-center gap-5 justify-center mt-1">
+                  <div className="flex items-center gap-1.5 text-xs text-secondary">
+                    <span className="w-4 h-0.5 bg-accent inline-block rounded" /> Текущий
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-secondary">
+                    <span className="w-4 border-t border-dashed border-silver inline-block" /> Цель
                   </div>
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
 
-          {/* ── AI Insights ───────────────────────────────── */}
-          <Card className="border-accent/20 bg-accent-light/20">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center">
-                <Sparkles size={14} className="text-white" />
-              </div>
-              <h3 className="font-bold text-dark text-sm">AI-инсайты по вашему треку</h3>
-              <Badge variant="accent" className="text-[10px] ml-auto">Обновлено сегодня</Badge>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {aiInsights.map((ins, i) => (
-                <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-border">
-                  <span className="text-base flex-shrink-0">{ins.icon}</span>
-                  <p className="text-xs text-secondary leading-relaxed">{ins.text}</p>
+              {/* AI Insights */}
+              <Card className="border-accent/20" style={{ background: 'linear-gradient(145deg, #FFFFFF 0%, #F5F9FF 100%)' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
+                    <Sparkles size={15} className="text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-dark text-sm">AI-инсайты</h3>
+                    <p className="text-xs text-secondary">По вашему треку</p>
+                  </div>
+                  <Badge variant="accent" className="text-[10px]">Live</Badge>
                 </div>
-              ))}
+                <div className="space-y-2">
+                  {aiInsights.map((ins, i) => (
+                    <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-border">
+                      <span className="text-sm flex-shrink-0">{ins.icon}</span>
+                      <p className="text-xs text-secondary leading-relaxed">{ins.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Gap Analysis */}
+              <Card>
+                <CardHeader title="Анализ пробелов" subtitle={`${mustHave.length} обязательных`}
+                  icon={<AlertTriangle size={18} />} iconBg="#FEF3C7" iconColor="#B45309" />
+                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
+                  Обязательные <span className="text-danger">({mustHave.length})</span>
+                </p>
+                <div className="space-y-2 mb-4">
+                  {mustHave.map((gap, i) => (
+                    <GapCard key={i} gap={gap} expanded={expandedGap === gap.skill}
+                      onToggle={() => setExpandedGap(expandedGap === gap.skill ? null : gap.skill)}
+                      onLearn={() => navigate('/learning')} />
+                  ))}
+                </div>
+                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
+                  Желательные <span className="text-muted">({niceHave.length})</span>
+                </p>
+                <div className="space-y-2">
+                  {niceHave.map((gap, i) => (
+                    <GapCard key={i} gap={gap} expanded={expandedGap === gap.skill}
+                      onToggle={() => setExpandedGap(expandedGap === gap.skill ? null : gap.skill)}
+                      onLearn={() => navigate('/learning')} />
+                  ))}
+                </div>
+              </Card>
+
             </div>
-          </Card>
-
-          {/* ── Competency Radar ──────────────────────────── */}
-          <Card>
-            <CardHeader title="Компетенции: текущие vs цель" subtitle={`→ ${user.targetRole}`}
-              icon={<Award size={18} />} iconBg="#EDE9F6" iconColor="#6D4FA0" />
-            <ResponsiveContainer width="100%" height={220}>
-              <RadarChart data={radarData} cx="50%" cy="50%" outerRadius={85}>
-                <PolarGrid stroke="#DDE1E9" />
-                <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10, fill: '#8A919E' }} />
-                <Radar name="Текущий" dataKey="current" stroke="#005DB9" fill="#005DB9" fillOpacity={0.13} strokeWidth={2} />
-                <Radar name="Цель"    dataKey="target"  stroke="#B8BDC5"  fill="none"   strokeWidth={1.5} strokeDasharray="4 2" />
-                <Tooltip {...tooltip} />
-              </RadarChart>
-            </ResponsiveContainer>
-            <div className="flex items-center gap-6 justify-center mt-1">
-              <div className="flex items-center gap-1.5 text-xs text-secondary">
-                <span className="w-4 h-0.5 bg-accent inline-block rounded" /> Текущий уровень
-              </div>
-              <div className="flex items-center gap-1.5 text-xs text-secondary">
-                <span className="w-4 border-t border-dashed border-silver inline-block" /> Целевой уровень
-              </div>
-            </div>
-          </Card>
-
-          {/* ── Gap Analysis ──────────────────────────────── */}
-          <Card>
-            <CardHeader title="Анализ пробелов" subtitle="Сравнение: текущая роль → целевая"
-              icon={<AlertTriangle size={18} />} iconBg="#FEF3C7" iconColor="#B45309" />
-
-            <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
-              Обязательные <span className="text-danger">({mustHave.length})</span>
-            </p>
-            <div className="space-y-2 mb-5">
-              {mustHave.map((gap, i) => (
-                <GapCard key={i} gap={gap} expanded={expandedGap === gap.skill}
-                  onToggle={() => setExpandedGap(expandedGap === gap.skill ? null : gap.skill)}
-                  onLearn={() => navigate('/learning')} />
-              ))}
-            </div>
-
-            <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
-              Желательные <span className="text-muted">({niceHave.length})</span>
-            </p>
-            <div className="space-y-2">
-              {niceHave.map((gap, i) => (
-                <GapCard key={i} gap={gap} expanded={expandedGap === gap.skill}
-                  onToggle={() => setExpandedGap(expandedGap === gap.skill ? null : gap.skill)}
-                  onLearn={() => navigate('/learning')} />
-              ))}
-            </div>
-          </Card>
-
+          </div>
         </>
       )}
     </div>
