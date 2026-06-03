@@ -91,12 +91,21 @@ function WeekView({ weekStart, events, onEventClick, today }) {
                   const durMin = ev.duration || 60;
                   const topPx = ((startMin - START_HOUR * 60) / 60) * PX_PER_HOUR;
                   const heightPx = Math.max((durMin / 60) * PX_PER_HOUR - 3, 24);
+                  const isShort = heightPx <= 30;
                   return (
                     <div key={ev.id} onClick={() => onEventClick(ev)}
-                      className="absolute left-1 right-1 z-10 cursor-pointer rounded-lg px-2 py-1 hover:brightness-95 transition-all overflow-hidden"
-                      style={{ top: `${topPx}px`, height: `${heightPx}px`, backgroundColor: cfg.bg, borderLeft: `3px solid ${cfg.border}` }}>
-                      <p className="text-[9px] font-semibold leading-none" style={{ color: cfg.border }}>{ev.time}</p>
-                      <p className="text-[11px] font-bold leading-snug mt-0.5 truncate" style={{ color: cfg.text }}>{ev.title}</p>
+                      className="absolute left-1 right-1 z-10 cursor-pointer rounded-lg px-2 hover:brightness-95 transition-all overflow-hidden"
+                      style={{ top: `${topPx}px`, height: `${heightPx}px`, backgroundColor: cfg.bg, borderLeft: `3px solid ${cfg.border}`, paddingTop: isShort ? '4px' : '4px', paddingBottom: isShort ? '2px' : '4px' }}>
+                      {isShort ? (
+                        <p className="text-[10px] font-bold leading-none truncate" style={{ color: cfg.text }}>
+                          {ev.time} · {ev.title}
+                        </p>
+                      ) : (
+                        <>
+                          <p className="text-[9px] font-semibold leading-none" style={{ color: cfg.border }}>{ev.time}</p>
+                          <p className="text-[11px] font-bold leading-snug mt-0.5 truncate" style={{ color: cfg.text }}>{ev.title}</p>
+                        </>
+                      )}
                     </div>
                   );
                 })}

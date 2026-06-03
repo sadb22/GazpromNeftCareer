@@ -235,7 +235,6 @@ export default function Career() {
                             <div className="absolute -left-[21px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
                               style={{ backgroundColor: step.status === 'in_progress' ? '#005DB9' : step.status === 'completed' ? '#1A7A4A' : '#DDE1E9' }} />
                             <div className="flex items-start gap-3">
-                              <span className="text-lg flex-shrink-0">{step.icon}</span>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap mb-1">
                                   <h4 className="text-sm font-semibold text-dark">{step.title}</h4>
@@ -317,21 +316,28 @@ export default function Career() {
                 </div>
               </Card>
 
-              {/* Gap Analysis */}
-              <Card>
-                <CardHeader title="Анализ пробелов" subtitle={`${mustHave.length} обязательных`}
-                  icon={<AlertTriangle size={18} />} iconBg="#FEF3C7" iconColor="#B45309" />
-                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
+            </div>
+          </div>
+
+          {/* ── Gap Analysis — FULL WIDTH ── */}
+          <Card>
+            <CardHeader title="Анализ пробелов" subtitle="Сравнение навыков: текущая роль → целевая"
+              icon={<AlertTriangle size={18} />} iconBg="#FEF3C7" iconColor="#B45309" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-3">
                   Обязательные <span className="text-danger">({mustHave.length})</span>
                 </p>
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2">
                   {mustHave.map((gap, i) => (
                     <GapCard key={i} gap={gap} expanded={expandedGap === gap.skill}
                       onToggle={() => setExpandedGap(expandedGap === gap.skill ? null : gap.skill)}
                       onLearn={() => navigate('/learning')} />
                   ))}
                 </div>
-                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-2">
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-3">
                   Желательные <span className="text-muted">({niceHave.length})</span>
                 </p>
                 <div className="space-y-2">
@@ -341,10 +347,9 @@ export default function Career() {
                       onLearn={() => navigate('/learning')} />
                   ))}
                 </div>
-              </Card>
-
+              </div>
             </div>
-          </div>
+          </Card>
         </>
       )}
     </div>

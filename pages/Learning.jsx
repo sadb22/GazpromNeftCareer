@@ -96,57 +96,43 @@ export default function Learning() {
         </p>
       </div>
 
-      {/* ── Trajectory Progress (large hero block) ── */}
+      {/* ── Trajectory Progress ── */}
       <div className="bg-white rounded-2xl border border-border shadow-card p-6">
-        <div className="flex items-start gap-6 flex-wrap">
+        {/* Header */}
+        <div className="flex items-center gap-2.5 mb-5">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor:'#EBF2FB', color:'#005DB9' }}>
+            <TrendingUp size={18} />
+          </div>
+          <div>
+            <h3 className="font-bold text-dark text-base">Прогресс по траектории</h3>
+            <p className="text-xs text-secondary">Выполнение учебного плана</p>
+          </div>
+          <div className="ml-auto text-right">
+            <p className="text-xs text-success font-semibold">+6% за месяц</p>
+          </div>
+        </div>
+
+        {/* DonutChart + 4 equal stat cards */}
+        <div className="flex items-center gap-6">
           <div className="flex-shrink-0">
             <DonutChart
               percentage={overallPct}
               completed={totalCompleted}
               inProgress={inProgressMods}
               planned={plannedMods}
-              size={140}
+              size={120}
             />
           </div>
-          <div className="flex-1 min-w-[200px]">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#EBF2FB', color: '#005DB9' }}>
-                <TrendingUp size={18} />
-              </div>
-              <div>
-                <h3 className="font-bold text-dark text-base">Прогресс по траектории</h3>
-                <p className="text-xs text-secondary">Выполнение учебного плана</p>
-              </div>
-            </div>
-            <div className="flex items-end gap-3 mb-4">
-              <p className="text-5xl font-bold text-dark leading-none">{overallPct}%</p>
-              <div className="mb-1">
-                <p className="text-sm font-semibold text-success">+6% за месяц</p>
-                <p className="text-xs text-secondary">модулей завершено</p>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { label: 'Завершено',   value: totalCompleted,  color: '#1A7A4A', bg: '#D6EFE1' },
-                { label: 'В процессе',  value: inProgressMods,  color: '#005DB9', bg: '#EBF2FB' },
-                { label: 'Запланировано', value: plannedMods,  color: '#5B6B7D', bg: '#ECEEF2' },
-              ].map((s, i) => (
-                <div key={i} className="p-3 rounded-xl text-center" style={{ backgroundColor: s.bg }}>
-                  <p className="text-lg font-bold" style={{ color: s.color }}>{s.value}</p>
-                  <p className="text-[10px] text-secondary mt-0.5">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Stats strip */}
-          <div className="grid grid-cols-2 gap-3 w-full sm:w-auto sm:flex sm:flex-col sm:gap-3">
+          <div className="flex-1 grid grid-cols-4 gap-3">
             {[
-              { label: 'Активных курсов', value: activeCourses.length,    color: '#005DB9', bg: '#EBF2FB' },
-              { label: 'Часов обучения',  value: '124',                    color: '#6D4FA0', bg: '#EDE9F6' },
+              { label: 'Прогресс',      value: `${overallPct}%`, color: '#005DB9', bg: '#EBF2FB' },
+              { label: 'Завершено мод.', value: totalCompleted,   color: '#1A7A4A', bg: '#D6EFE1' },
+              { label: 'В процессе',    value: inProgressMods,   color: '#B45309', bg: '#FEF3C7' },
+              { label: 'Часов обучения', value: '124',            color: '#6D4FA0', bg: '#EDE9F6' },
             ].map((s, i) => (
-              <div key={i} className="bg-white rounded-xl border border-border px-4 py-3 text-center min-w-[110px]">
-                <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
-                <p className="text-xs text-secondary mt-0.5">{s.label}</p>
+              <div key={i} className="rounded-xl border border-border p-4 text-center" style={{ backgroundColor: s.bg }}>
+                <p className="text-2xl font-bold leading-none" style={{ color: s.color }}>{s.value}</p>
+                <p className="text-[11px] text-secondary mt-2 leading-snug">{s.label}</p>
               </div>
             ))}
           </div>
