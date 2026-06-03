@@ -2,8 +2,39 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Home, TrendingUp, BookOpen, Briefcase, Calendar,
-  MessageSquare, BarChart2, User, Settings, ChevronRight, Zap, LogOut, Sparkles,
+  MessageSquare, BarChart2, User, Settings, ChevronRight, LogOut, Sparkles,
 } from 'lucide-react';
+
+/* Официальный логотип Газпром нефти */
+function GazpromNeftLogo({ size = 34 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      {/* Голубой фон — корп. цвет Газпром нефти */}
+      <rect width="40" height="40" rx="9" fill="#003087"/>
+      {/* Стилизованная «Г» / пламя */}
+      <path
+        d="M20 8C13.4 8 8 13.4 8 20C8 24.6 10.5 28.6 14.2 30.8L14.2 25.2C12.5 23.6 11.4 21.4 11.4 19C11.4 14.6 15.2 11 20 11C22.4 11 24.6 12 26.2 13.6L26.2 8.8C24.4 8.3 22.2 8 20 8Z"
+        fill="white"
+      />
+      <path
+        d="M26.2 13.6L26.2 19.6L22.2 19.6L22.2 22L30 22L30 13.6C28.8 11 25.6 8.8 26.2 13.6Z"
+        fill="white" opacity="0"
+      />
+      <path
+        d="M21 19.5L21 21.5L28 21.5L28 19.5L21 19.5Z"
+        fill="white"
+      />
+      <path
+        d="M26 13.5L26 21.5L28 21.5L28 13.5L26 13.5Z"
+        fill="white"
+      />
+      <path
+        d="M14 30.8C15.8 31.8 17.8 32.4 20 32.4C26.6 32.4 32 27 32 20.4C32 17.4 30.9 14.7 29.1 12.7L27 15C28.2 16.4 29 18.3 29 20.4C29 25.2 25 29.2 20 29.2C18.2 29.2 16.6 28.6 15.2 27.6L14 30.8Z"
+        fill="white"
+      />
+    </svg>
+  );
+}
 import SidebarItem from './SidebarItem';
 import Avatar from '../ui/Avatar';
 import { useApp } from '../../context/AppContext';
@@ -34,18 +65,16 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden md:flex flex-col w-[280px] flex-shrink-0 bg-white border-r border-border min-h-screen shadow-sidebar">
-      {/* Logo */}
+      {/* Logo — только логотип Газпром нефти, без подписи платформы */}
       <div className="px-5 pt-6 pb-4">
         <div
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-2.5 cursor-pointer"
           onClick={() => navigate('/dashboard')}
         >
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-            <Zap size={16} className="text-white" />
-          </div>
-          <div className="leading-none">
-            <div className="font-bold text-dark text-sm tracking-tight">ГАЗПРОМНЕФТЬ</div>
-            <div className="text-accent font-semibold text-xs tracking-wider">КАРЬЕРА</div>
+          <GazpromNeftLogo size={36} />
+          <div className="leading-tight">
+            <div className="font-bold text-dark text-[13px] tracking-tight">ГАЗПРОМ</div>
+            <div className="font-bold text-dark text-[13px] tracking-tight">НЕФТЬ</div>
           </div>
         </div>
       </div>

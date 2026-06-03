@@ -22,12 +22,14 @@ export default function Topbar() {
 
   return (
     <header className="h-14 bg-white border-b border-border flex items-center px-6 gap-4 flex-shrink-0 z-20 sticky top-0">
+      <span className="hidden lg:block text-sm font-semibold text-secondary whitespace-nowrap">Платформа развития</span>
+      <div className="hidden lg:block w-px h-5 bg-border" />
       <div className="flex-1 max-w-md">
         <div className="relative">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
           <input
             type="text"
-            placeholder="Поиск сотрудников, курсов..."
+            placeholder="Поиск сотрудников, курсов, материалов..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-8 py-2 text-sm bg-background border border-border rounded-xl text-dark placeholder-muted focus:border-accent/60 focus:bg-white transition-all"
