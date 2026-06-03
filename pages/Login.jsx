@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, Users, ChevronRight, Zap, Shield } from 'lucide-react';
+import { User, Users, ChevronRight, Shield } from 'lucide-react';
 import { useMode } from '../context/ModeContext';
 
 export default function Login() {
@@ -23,18 +23,16 @@ export default function Login() {
       style={{ background: 'linear-gradient(160deg, #F4F6F9 0%, #E8F0FA 100%)' }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-3 mb-12">
-        <div
-          className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-card"
-          style={{ backgroundColor: '#003366' }}
-        >
-          <Zap size={22} className="text-white" />
-        </div>
-        <div className="leading-none">
-          <div className="font-bold text-dark text-xl tracking-tight">ГАЗПРОМНЕФТЬ</div>
-          <div className="font-semibold text-xs tracking-widest mt-0.5" style={{ color: '#003366' }}>
-            КАРЬЕРНЫЙ НАВИГАТОР
-          </div>
+      <div className="flex flex-col items-center gap-2 mb-12">
+        <img
+          src="/logo.png"
+          alt="Газпром нефть"
+          width={220}
+          height={66}
+          style={{ objectFit: 'contain' }}
+        />
+        <div className="font-semibold text-xs tracking-widest" style={{ color: '#003366' }}>
+          КАРЬЕРНЫЙ НАВИГАТОР
         </div>
       </div>
 

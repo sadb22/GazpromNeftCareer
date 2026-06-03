@@ -180,11 +180,11 @@ function TaskTimelineSection({ taskList }) {
                   {/* Task info — horizontal card */}
                   <div className="flex-1 flex items-center gap-3 bg-background rounded-xl border border-border px-3.5 py-2.5 hover:border-accent/25 hover:bg-white transition-all">
                     <p className="text-sm font-semibold text-dark flex-1 leading-snug">{task.title}</p>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0"
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0 w-[72px] text-center"
                       style={{ backgroundColor: task.categoryBg, color: task.categoryColor }}>
                       {task.category}
                     </span>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0"
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0 w-[80px] text-center"
                       style={{ backgroundColor: st.bg, color: st.color }}>
                       {st.label}
                     </span>

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Users, MessageSquare, Calendar, BarChart2, Mail,
-  LogOut, Zap, ChevronRight,
+  LogOut, ChevronRight,
 } from 'lucide-react';
 import { useMode } from '../../context/ModeContext';
 import { managerUser } from '../../data/managerData';
@@ -33,24 +33,15 @@ export default function ManagerSidebar() {
       style={{ boxShadow: '2px 0 12px rgba(0,51,102,0.06)' }}
     >
       {/* Logo */}
-      <div className="px-5 pt-6 pb-5 border-b border-border">
-        <div
-          className="flex items-center gap-2.5 cursor-pointer"
+      <div className="px-5 pt-5 pb-4 border-b border-border">
+        <img
+          src="/logo.png"
+          alt="Газпром нефть"
+          width={180}
+          height={60}
+          style={{ objectFit: 'contain', cursor: 'pointer' }}
           onClick={() => navigate('/manager/team')}
-        >
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: PRIMARY }}
-          >
-            <Zap size={15} className="text-white" />
-          </div>
-          <div className="leading-none">
-            <div className="font-bold text-dark text-[13px] tracking-tight">ГАЗПРОМНЕФТЬ</div>
-            <div className="font-semibold text-[10px] tracking-wider mt-0.5" style={{ color: PRIMARY }}>
-              РУКОВОДИТЕЛЬ
-            </div>
-          </div>
-        </div>
+        />
       </div>
 
       {/* Manager profile block */}
