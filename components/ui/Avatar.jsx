@@ -9,12 +9,12 @@ const sizes = {
   '2xl': 'w-20 h-20 text-2xl',
 };
 
-export default function Avatar({ initials, color = '#005DB9', size = 'md', online, className = '' }) {
+export default function Avatar({ initials, color = '#005DB9', textColor, size = 'md', online, className = '' }) {
   return (
     <div className={`relative flex-shrink-0 ${className}`}>
       <div
-        className={`${sizes[size]} rounded-full flex items-center justify-center font-semibold text-white select-none`}
-        style={{ backgroundColor: color }}
+        className={`${sizes[size]} rounded-full flex items-center justify-center font-semibold select-none`}
+        style={{ backgroundColor: color, color: textColor || '#ffffff' }}
       >
         {initials}
       </div>

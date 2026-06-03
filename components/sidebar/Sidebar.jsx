@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Home, TrendingUp, BookOpen, Briefcase, Calendar,
-  MessageSquare, BarChart2, User, Settings, ChevronRight, Zap, LogOut,
+  MessageSquare, BarChart2, User, Settings, ChevronRight, Zap, LogOut, Sparkles,
 } from 'lucide-react';
 import SidebarItem from './SidebarItem';
 import Avatar from '../ui/Avatar';
@@ -10,13 +10,14 @@ import { useApp } from '../../context/AppContext';
 import { useMode } from '../../context/ModeContext';
 
 const nav = [
-  { to: '/dashboard',    icon: <Home size={18} />,        label: 'Главная' },
-  { to: '/career',       icon: <TrendingUp size={18} />,  label: 'Карьерный путь' },
-  { to: '/learning',     icon: <BookOpen size={18} />,    label: 'Обучение' },
-  { to: '/opportunities',icon: <Briefcase size={18} />,   label: 'Возможности' },
-  { to: '/calendar',     icon: <Calendar size={18} />,    label: 'Календарь' },
-  { to: '/messenger',    icon: <MessageSquare size={18} />, label: 'AI Ассистент' },
-  { to: '/analytics',    icon: <BarChart2 size={18} />,   label: 'Аналитика' },
+  { to: '/dashboard',     icon: <Home size={18} />,           label: 'Главная' },
+  { to: '/messenger',     icon: <MessageSquare size={18} />,  label: 'Сообщения' },
+  { to: '/calendar',      icon: <Calendar size={18} />,       label: 'Календарь' },
+  { to: '/learning',      icon: <BookOpen size={18} />,       label: 'Обучение' },
+  { to: '/analytics',     icon: <BarChart2 size={18} />,      label: 'Аналитика' },
+  { to: '/career',        icon: <TrendingUp size={18} />,     label: 'Карьерный путь' },
+  { to: '/ai-assistant',  icon: <Sparkles size={18} />,       label: 'AI-ассистент' },
+  { to: '/opportunities', icon: <Briefcase size={18} />,      label: 'Возможности' },
 ];
 
 const bottomNav = [
