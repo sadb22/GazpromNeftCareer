@@ -23,64 +23,54 @@ function CourseIcon({ status }) {
   return <div className="w-3 h-3 rounded-full border-2 border-muted flex-shrink-0" />;
 }
 
-/* ── Team KPI gauge — responsive SVG (no overflow) ─────────── */
-function TeamKpiGauge({ value = 85 }) {
+/* ── Segmented arc gauge (like reference) ───────────────────── */
+function SegmentGauge({ value = 85 }) {
   const N = 15;
-  // Fixed internal coordinate space — SVG scales to fit any container
-  const W = 280, H = 186;
+  const W = 200;
+  const H = 110;
   const cx = W / 2;
-  const cy = H * 0.80;          // centre of the arc (near bottom of viewBox)
-  const r  = W * 0.375;         // arc radius
+  const cy = 86;            // arc centre raised so arc fills viewBox from top
+  const r  = W * 0.375;    // 75
   const filledCount = Math.round((value / 100) * N);
-
-  const segW = W * 0.098;       // radial thickness (pill width)
-  const segH = (r * Math.PI / N) * 0.76; // tangential length with ~24% gap
-
+  const segW = W * 0.091;
+  const segH = (r * Math.PI / N) * 0.74;
   const toRad = d => (d * Math.PI) / 180;
 
   const blueScale = [
-    '#002266','#002D80','#003A99','#0048B3','#1260C4',
-    '#2272D4','#3384E0','#4796EC','#5BA8F4','#72B8F8',
-    '#88C6FA','#9ED3FC','#B3DFFE','#C8EAFF','#DAEEFF',
+    '#001F5C','#002D80','#003A99','#0A4FBD','#1A62CC',
+    '#2E75D8','#4488E4','#5A9AEE','#72ACF6','#8ABCF8',
+    '#A2CCFA','#B8D9FC','#CCE6FE','#DBEEFF','#E8F4FF',
   ];
 
   return (
-    <svg
-      width="100%"
-      viewBox={`0 0 ${W} ${H}`}
-      style={{ display: 'block', maxWidth: '100%' }}
-    >
-      {Array.from({ length: N }, (_, i) => {
-        const angleDeg = 180 - (i + 0.5) * (180 / N);
-        const rad = toRad(angleDeg);
-        const x = cx + r * Math.cos(rad);
-        const y = cy - r * Math.sin(rad);
-        const rotDeg = -angleDeg + 90;
-
-        return (
-          <rect
-            key={i}
-            x={x - segW / 2}
-            y={y - segH / 2}
-            width={segW}
-            height={segH}
-            rx={segH / 2}
-            ry={segH / 2}
-            fill={i < filledCount ? blueScale[i] : '#DDE8F6'}
-            transform={`rotate(${rotDeg}, ${x}, ${y})`}
-          />
-        );
-      })}
-
-      <text x={cx} y={cy - 8} textAnchor="middle" fill="#1A2533"
-        style={{ fontSize: W * 0.165, fontWeight: 800, fontFamily: '-apple-system,sans-serif' }}>
-        {value}%
-      </text>
-      <text x={cx} y={cy + W * 0.068} textAnchor="middle" fill="#5B6B7D"
-        style={{ fontSize: W * 0.063, fontFamily: '-apple-system,sans-serif' }}>
-        Средний KPI
-      </text>
-    </svg>
+    <div className="w-full max-w-[175px] mx-auto">
+      <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ display: 'block' }}>
+        {Array.from({ length: N }, (_, i) => {
+          const angleDeg = 180 - (i + 0.5) * (180 / N);
+          const rad = toRad(angleDeg);
+          const x = cx + r * Math.cos(rad);
+          const y = cy - r * Math.sin(rad);
+          const rotDeg = -angleDeg + 90;
+          return (
+            <rect key={i}
+              x={x - segW / 2} y={y - segH / 2}
+              width={segW} height={segH}
+              rx={segH / 2} ry={segH / 2}
+              fill={i < filledCount ? blueScale[i] : '#DDE8F6'}
+              transform={`rotate(${rotDeg}, ${x}, ${y})`}
+            />
+          );
+        })}
+        <text x={cx} y={cy - 4} textAnchor="middle" fill="#1A2533"
+          style={{ fontSize: 33, fontWeight: 800, fontFamily: '-apple-system,sans-serif' }}>
+          {value}%
+        </text>
+        <text x={cx} y={cy + 14} textAnchor="middle" fill="#5B6B7D"
+          style={{ fontSize: 11, fontFamily: '-apple-system,sans-serif' }}>
+          Средний KPI
+        </text>
+      </svg>
+    </div>
   );
 }
 
@@ -118,7 +108,7 @@ export default function Team() {
       </div>
 
       {/* ── Top statistics row ── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
 
         {/* 1. Total employees */}
         <div className="bg-white rounded-2xl border border-border px-4 py-3.5 shadow-card flex items-center gap-3">
@@ -132,10 +122,10 @@ export default function Team() {
           </div>
         </div>
 
-        {/* 2. Team KPI gauge — no three-dot menu */}
-        <div className="bg-white rounded-2xl border border-border px-4 pt-3 pb-2 shadow-card flex flex-col items-center">
-          <p className="text-sm font-semibold text-dark self-start mb-1">KPI команды</p>
-          <TeamKpiGauge value={avgKpi} />
+        {/* 2. Team KPI gauge */}
+        <div className="bg-white rounded-2xl border border-border shadow-card px-4 pt-3.5 pb-3 flex flex-col">
+          <p className="text-xs font-semibold text-secondary mb-1">KPI команды</p>
+          <SegmentGauge value={avgKpi} />
         </div>
 
         {/* 3. Pending IDP approval */}

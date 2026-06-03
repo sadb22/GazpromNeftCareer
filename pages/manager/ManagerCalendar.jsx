@@ -68,7 +68,11 @@ function WeekView({ weekStart, events, onEventClick, today }) {
     <div className="flex-1 bg-white rounded-2xl border border-border shadow-card overflow-hidden flex flex-col">
       {/* Day headers */}
       <div className="flex border-b border-border bg-background/40 flex-shrink-0">
-        <div className="w-14 flex-shrink-0" /> {/* time column spacer */}
+        <div className="w-14 flex-shrink-0 relative">
+          <span className="absolute right-2 bottom-0 translate-y-[50%] text-[10px] text-muted font-medium leading-none">
+            {START_HOUR}:00
+          </span>
+        </div>
         {days.map((day, i) => {
           const isToday = fmtDate(day) === today;
           return (
@@ -94,10 +98,13 @@ function WeekView({ weekStart, events, onEventClick, today }) {
         <div className="flex">
           {/* Time labels */}
           <div className="w-14 flex-shrink-0">
-            {HOURS.map(h => (
-              <div key={h} className="border-b border-border flex items-start justify-end pr-2 pt-1"
-                style={{ height: PX_PER_HOUR }}>
-                <span className="text-[10px] text-muted font-medium">{h}:00</span>
+            {HOURS.map((h, idx) => (
+              <div key={h} className="relative" style={{ height: PX_PER_HOUR }}>
+                {idx > 0 && (
+                  <span className="absolute right-2 top-0 -translate-y-1/2 text-[10px] text-muted font-medium leading-none">
+                    {h}:00
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -115,8 +122,9 @@ function WeekView({ weekStart, events, onEventClick, today }) {
                   ${isToday ? 'bg-blue-50/30' : ''}`}
               >
                 {/* Hour grid lines */}
-                {HOURS.map(h => (
-                  <div key={h} className="border-b border-border/60"
+                {HOURS.map((h, idx) => (
+                  <div key={h}
+                    className={idx > 0 ? 'border-t border-border/60' : ''}
                     style={{ height: PX_PER_HOUR }} />
                 ))}
 
