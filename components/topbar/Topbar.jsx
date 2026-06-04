@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bell, Search, ChevronDown, X, Check } from 'lucide-react';
+import { Bell, Search, ChevronDown, X, Check, Menu } from 'lucide-react';
 import Avatar from '../ui/Avatar';
 import Badge from '../ui/Badge';
 import { useApp } from '../../context/AppContext';
 
 const notifIcons = { opportunity: '💼', learning: '📚', message: '💬', review: '📋' };
 
-export default function Topbar() {
+export default function Topbar({ onMenuClick }) {
   const navigate = useNavigate();
   const { user, notifications, unreadCount, markNotificationRead, markAllRead } = useApp();
   const [showNotifs, setShowNotifs] = useState(false);
@@ -21,7 +21,15 @@ export default function Topbar() {
   }, []);
 
   return (
-    <header className="h-14 bg-white border-b border-border flex items-center px-6 gap-4 flex-shrink-0 z-20 sticky top-0">
+    <header className="h-14 bg-white border-b border-border flex items-center px-4 gap-3 flex-shrink-0 z-20 sticky top-0">
+      {/* Hamburger — mobile only */}
+      <button
+        onClick={onMenuClick}
+        className="md:hidden p-2 -ml-1 rounded-xl text-secondary hover:bg-background transition-colors flex-shrink-0"
+        aria-label="Открыть меню"
+      >
+        <Menu size={20} />
+      </button>
       <span className="hidden lg:block text-sm font-semibold text-secondary whitespace-nowrap">Платформа развития</span>
       <div className="hidden lg:block w-px h-5 bg-border" />
       <div className="flex-1 max-w-md">

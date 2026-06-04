@@ -25,7 +25,7 @@ const bottomNav = [
   { to: '/settings', icon: <Settings size={18} />, label: 'Настройки' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ mobile = false }) {
   const navigate     = useNavigate();
   const { user }     = useApp();
   const { logout }   = useMode();
@@ -33,7 +33,7 @@ export default function Sidebar() {
   const handleLogout = () => { logout(); navigate('/'); };
 
   return (
-    <aside className="hidden md:flex flex-col w-[280px] flex-shrink-0 bg-white border-r border-border min-h-screen shadow-sidebar">
+    <aside className={`${mobile ? 'flex' : 'hidden md:flex'} flex-col w-[280px] flex-shrink-0 bg-white border-r border-border min-h-screen shadow-sidebar`}>
       {/* Logo */}
       <div className="px-5 pt-5 pb-4">
         <img

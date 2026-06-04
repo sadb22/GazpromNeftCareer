@@ -191,7 +191,7 @@ export default function Career() {
       {aiGenerated && !aiLoading && (
         <>
           {/* Stats strip — full width */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white rounded-2xl border border-border p-5 shadow-card">
               <p className="text-xs text-secondary mb-2">Прогресс</p>
               <p className="text-3xl font-bold text-dark">{user.careerProgress}%</p>

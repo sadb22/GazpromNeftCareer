@@ -159,35 +159,37 @@ function TaskTimelineSection({ taskList }) {
               return (
                 <div key={task.id} className="flex items-center gap-0 py-1.5">
                   {/* Circle marker */}
-                  <div className="w-14 flex-shrink-0 flex flex-col items-center gap-1 relative z-10">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center border-2 ${
+                  <div className="w-10 sm:w-14 flex-shrink-0 flex flex-col items-center gap-1 relative z-10">
+                    <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border-2 ${
                       isDone ? 'bg-success border-success' :
                       isToday ? 'bg-accent border-accent' :
                       task.status === 'in_progress' ? 'bg-accent/20 border-accent' :
                       'bg-white border-border'
                     }`}>
-                      {isDone && <CheckCircle size={14} className="text-white" />}
-                      {isToday && !isDone && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
+                      {isDone && <CheckCircle size={12} className="text-white" />}
+                      {isToday && !isDone && <div className="w-2 h-2 rounded-full bg-white" />}
                     </div>
                   </div>
 
                   {/* Date block */}
-                  <div className="w-10 flex-shrink-0 text-center mr-3">
-                    <p className="text-sm font-bold text-dark leading-none">{day}</p>
-                    <p className="text-[10px] text-muted font-semibold uppercase tracking-wide mt-0.5">{monthAbbr}</p>
+                  <div className="w-8 sm:w-10 flex-shrink-0 text-center mr-2 sm:mr-3">
+                    <p className="text-xs sm:text-sm font-bold text-dark leading-none">{day}</p>
+                    <p className="text-[9px] sm:text-[10px] text-muted font-semibold uppercase tracking-wide mt-0.5">{monthAbbr}</p>
                   </div>
 
-                  {/* Task info — horizontal card */}
-                  <div className="flex-1 flex items-center gap-3 bg-background rounded-xl border border-border px-3.5 py-2.5 hover:border-accent/25 hover:bg-white transition-all">
-                    <p className="text-sm font-semibold text-dark flex-1 leading-snug">{task.title}</p>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0 w-[72px] text-center"
-                      style={{ backgroundColor: task.categoryBg, color: task.categoryColor }}>
-                      {task.category}
-                    </span>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0 w-[80px] text-center"
-                      style={{ backgroundColor: st.bg, color: st.color }}>
-                      {st.label}
-                    </span>
+                  {/* Task info — stacks on mobile, row on sm+ */}
+                  <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 bg-background rounded-xl border border-border px-3 py-2.5 hover:border-accent/25 hover:bg-white transition-all min-w-0">
+                    <p className="text-xs sm:text-sm font-semibold text-dark flex-1 leading-snug">{task.title}</p>
+                    <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full sm:w-[72px] text-center"
+                        style={{ backgroundColor: task.categoryBg, color: task.categoryColor }}>
+                        {task.category}
+                      </span>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full sm:w-[80px] text-center"
+                        style={{ backgroundColor: st.bg, color: st.color }}>
+                        {st.label}
+                      </span>
+                    </div>
                   </div>
                 </div>
               );
@@ -292,7 +294,7 @@ function CareerTabContent({ user, targetRole, courses: allCourses, navigate, onC
             Все курсы <ChevronRight size={12} />
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {active.map(c => (
             <div key={c.id} className="p-3.5 rounded-xl bg-background border border-border hover:border-accent/20 hover:bg-white transition-all cursor-pointer" onClick={() => navigate('/learning')}>
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full inline-block mb-1.5"
@@ -345,7 +347,7 @@ function CareerTabContent({ user, targetRole, courses: allCourses, navigate, onC
       </div>
 
       {/* Metrics */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           {label:'Прогресс карьеры',value:`${user.careerProgress}%`,sub:'Завершено шагов',color:'#1A2533'},
           {label:'Прогноз перехода',value:'Q1 2027',sub:'При текущем темпе',color:'#005DB9'},
@@ -366,7 +368,7 @@ function CareerTabContent({ user, targetRole, courses: allCourses, navigate, onC
           <div><h3 className="font-bold text-dark text-sm">AI-рекомендации</h3><p className="text-xs text-secondary">Персонализировано</p></div>
           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent text-white ml-auto">Live</span>
         </div>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {[
             { title:'Приоритет #1', text:'Завершить Python ML — критично для перехода к Senior AI Engineer' },
             { title:'Рекомендация', text:'Backend Tech Lead — 91% совпадение уже сейчас, доступен' },
@@ -458,7 +460,7 @@ export default function Dashboard() {
       <div className="max-w-[1280px] mx-auto space-y-5">
 
         {/* ── TOP ROW: 5 equal cards ── */}
-        <div className="grid grid-cols-5 gap-4 items-stretch">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
           <EmployeeTopCard user={user} />
           <KpiTopCard
             label="KPI сотрудника"
@@ -502,7 +504,7 @@ export default function Dashboard() {
 
         {/* ── ОСНОВНАЯ ИНФОРМАЦИЯ ── */}
         {activeTab === 0 && (
-          <div className="grid grid-cols-[1.3fr_1fr] gap-5 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-5 items-start">
             <TaskTimelineSection taskList={tasks} />
             <MeetingsTodaySection events={calendarEvents} navigate={navigate} />
           </div>

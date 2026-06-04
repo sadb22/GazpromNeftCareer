@@ -41,7 +41,7 @@ function getFirstDayOfMonth(y, m) { const d = new Date(y, m, 1).getDay(); return
 function WeekView({ weekStart, events, onEventClick, today }) {
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
   return (
-    <div className="flex-1 bg-white rounded-2xl border border-border shadow-card overflow-hidden flex flex-col">
+    <div className="flex-1 min-w-0 bg-white rounded-2xl border border-border shadow-card overflow-hidden flex flex-col">
       <div className="flex border-b border-border bg-background/40 flex-shrink-0">
         <div className="w-14 flex-shrink-0 relative">
           <span className="absolute right-2 bottom-0 translate-y-[50%] text-[10px] text-muted font-medium leading-none">{START_HOUR}:00</span>
@@ -57,8 +57,8 @@ function WeekView({ weekStart, events, onEventClick, today }) {
           );
         })}
       </div>
-      <div className="overflow-y-auto flex-1" style={{ maxHeight: '560px' }}>
-        <div className="flex">
+      <div className="overflow-auto flex-1" style={{ maxHeight: '560px' }}>
+        <div className="flex min-w-[560px]">
           <div className="w-14 flex-shrink-0">
             {HOURS.map((h, idx) => (
               <div key={h} className="relative" style={{ height: PX_PER_HOUR }}>
@@ -165,7 +165,7 @@ function MonthView({ year, month, events, onEventClick, today }) {
 function UpcomingPanel({ events, today, onEventClick }) {
   const upcoming = [...events].filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date) || (a.time || '').localeCompare(b.time || '')).slice(0, 8);
   return (
-    <div className="w-60 flex-shrink-0 bg-white rounded-2xl border border-border shadow-card flex flex-col overflow-hidden">
+    <div className="hidden md:flex w-60 flex-shrink-0 bg-white rounded-2xl border border-border shadow-card flex-col overflow-hidden">
       <div className="px-4 py-3.5 border-b border-border">
         <p className="text-xs font-bold text-dark uppercase tracking-wide">Ближайшие события</p>
       </div>
@@ -326,8 +326,8 @@ export default function CalendarPage() {
               </button>
             ))}
           </div>
-          <button onClick={() => setShowModal(true)} className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold text-white" style={{ backgroundColor: '#003087' }}>
-            <Plus size={15} /> Запланировать встречу
+          <button onClick={() => setShowModal(true)} className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl text-sm font-semibold text-white whitespace-nowrap" style={{ backgroundColor: '#003087' }}>
+            <Plus size={15} /> <span className="hidden sm:inline">Запланировать встречу</span><span className="sm:hidden">Добавить</span>
           </button>
         </div>
       </div>

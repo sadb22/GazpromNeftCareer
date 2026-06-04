@@ -105,7 +105,7 @@ export default function Profile() {
       </Card>
 
       {/* Action buttons */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <Button variant="primary" size="lg" onClick={() => navigate('/career')}
           icon={<TrendingUp size={16} />} className="justify-center">
           Сформировать путь
@@ -232,7 +232,7 @@ export default function Profile() {
 
       {activeTab === 'learning' && (
         <div className="space-y-5">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { label: 'Завершено', value: user.completedCourses, color: '#10B981' },
               { label: 'Активных',  value: user.activeCourses,    color: '#005DB9' },

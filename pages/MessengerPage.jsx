@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Search, Hash } from 'lucide-react';
+import { Send, Search, Hash, ArrowLeft } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 import { channels, directMessages, conversations } from '../data/messages';
 import { useApp } from '../context/AppContext';
@@ -9,6 +9,7 @@ export default function MessengerPage() {
   const [activeChat, setActiveChat] = useState('dm-gromov');
   const [allConvos, setAllConvos] = useState(conversations);
   const [input, setInput] = useState('');
+  const [showList, setShowList] = useState(true); // mobile: list vs chat view
   const bottomRef = useRef(null);
 
   const currentConvo = allConvos[activeChat] || [];
@@ -43,7 +44,7 @@ export default function MessengerPage() {
     <div className="flex bg-background" style={{ height: 'calc(100vh - 56px)' }}>
 
       {/* ── Left panel ───────────────────────────── */}
-      <div className="w-72 bg-white border-r border-border flex flex-col flex-shrink-0">
+      <div className={`${showList ? 'flex' : 'hidden'} md:flex w-full md:w-72 bg-white border-r border-border flex-col flex-shrink-0`}>
         <div className="px-4 pt-5 pb-3 border-b border-border">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-bold text-dark text-base">Сообщения</h2>
@@ -73,7 +74,7 @@ export default function MessengerPage() {
             <ChatItem
               key={ch.id}
               active={activeChat === ch.id}
-              onClick={() => setActiveChat(ch.id)}
+              onClick={() => { setActiveChat(ch.id); setShowList(false); }}
               unread={ch.unread}
               time={ch.time}
               lastMessage={ch.lastMessage}
@@ -94,7 +95,7 @@ export default function MessengerPage() {
             <ChatItem
               key={dm.id}
               active={activeChat === dm.id}
-              onClick={() => setActiveChat(dm.id)}
+              onClick={() => { setActiveChat(dm.id); setShowList(false); }}
               unread={dm.unread}
               time={dm.time}
               lastMessage={dm.lastMessage}
@@ -108,9 +109,16 @@ export default function MessengerPage() {
       </div>
 
       {/* ── Conversation area ────────────────────── */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className={`${showList ? 'hidden' : 'flex'} md:flex flex-1 flex-col min-w-0`}>
         {/* Header */}
-        <div className="h-14 bg-white border-b border-border flex items-center px-5 gap-3 flex-shrink-0">
+        <div className="h-14 bg-white border-b border-border flex items-center px-4 gap-3 flex-shrink-0">
+          {/* Back button — mobile only */}
+          <button
+            onClick={() => setShowList(true)}
+            className="md:hidden p-1.5 rounded-xl text-secondary hover:bg-background transition-colors flex-shrink-0"
+          >
+            <ArrowLeft size={18} />
+          </button>
           {currentContact && (
             <>
               {currentContact.type === 'channel' ? (

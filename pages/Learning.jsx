@@ -113,7 +113,7 @@ export default function Learning() {
         </div>
 
         {/* DonutChart + 4 equal stat cards */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-6">
           <div className="flex-shrink-0">
             <DonutChart
               percentage={overallPct}
@@ -123,7 +123,7 @@ export default function Learning() {
               size={120}
             />
           </div>
-          <div className="flex-1 grid grid-cols-4 gap-3">
+          <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
             {[
               { label: 'Прогресс',      value: `${overallPct}%`, color: '#005DB9', bg: '#EBF2FB' },
               { label: 'Завершено мод.', value: totalCompleted,   color: '#1A7A4A', bg: '#D6EFE1' },

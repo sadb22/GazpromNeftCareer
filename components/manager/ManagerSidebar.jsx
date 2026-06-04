@@ -18,7 +18,7 @@ const NAV = [
 const PRIMARY = '#003366';
 const PRIMARY_LIGHT = '#EEF2F8';
 
-export default function ManagerSidebar() {
+export default function ManagerSidebar({ mobile = false }) {
   const navigate     = useNavigate();
   const { logout }   = useMode();
 
@@ -29,7 +29,7 @@ export default function ManagerSidebar() {
 
   return (
     <aside
-      className="hidden md:flex flex-col w-[240px] flex-shrink-0 min-h-screen bg-white border-r border-border"
+      className={`${mobile ? 'flex' : 'hidden md:flex'} flex-col w-[240px] flex-shrink-0 min-h-screen bg-white border-r border-border`}
       style={{ boxShadow: '2px 0 12px rgba(0,51,102,0.06)' }}
     >
       {/* Logo */}
